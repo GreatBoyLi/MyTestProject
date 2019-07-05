@@ -14,7 +14,7 @@ public class OneInterfaceTest1 extends UnitTestBase {
 	@Test
 	public void testHello() {
 		//OneInterface one = super.getBean("oneInterface");
-		System.out.println("llllllll");
+		System.out.println("llllllll122222");
 	}
 
 }

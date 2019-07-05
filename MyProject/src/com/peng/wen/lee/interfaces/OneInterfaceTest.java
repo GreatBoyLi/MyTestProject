@@ -10,7 +10,7 @@ public class OneInterfaceTest{
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		OneInterfaceImpl one = (OneInterfaceImpl) context.getBean("oneInterface");
-		System.out.println(one.hello("李文鹏"));
+		System.out.println(one.hello("李文鹏啊啊啊啊"));
 	}
 
 }
