@@ -9,8 +9,11 @@ public class Main {
         AnimalFactory animalFactory = (AnimalFactory)context.getBean("animalFactory");
         Animal cat = animalFactory.getAnimals().get(0);
         Animal dog = animalFactory.getAnimals().get(1);
+        Animal animal = animalFactory.getAnimals().get(2);
 
+        System.out.println(animalFactory.getAnimals().size());
         cat.say();
         dog.say();
+        animal.say();
     }
 }
