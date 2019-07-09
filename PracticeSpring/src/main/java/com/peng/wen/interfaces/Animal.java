@@ -20,6 +20,10 @@ public class Animal {
 
     public String getValue(String key){
         JSONObject jsonObject = this.attribute.getJSONObject(key);
-        return null;
+        if (!jsonObject.isEmpty()) {
+            return jsonObject.getString("HAHA");
+        } else {
+            return null;
+        }
     }
 }
