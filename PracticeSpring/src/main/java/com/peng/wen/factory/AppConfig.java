@@ -17,7 +17,7 @@ public class AppConfig {
     private String name;
     @Bean
     public Animal myElephant(){
-        return new Elephant();
+        return new Elephant(this.name,this.a);
     }
 
     public void say(){
