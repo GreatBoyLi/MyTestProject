@@ -5,7 +5,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Animal {
-    JSONObject attribute;
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    private JSONObject attribute = new JSONObject();
 
     public JSONObject getAttribute() {
         return attribute;
@@ -20,7 +30,7 @@ public class Animal {
 
     public String getValue(String key){
         JSONObject jsonObject = this.attribute.getJSONObject(key);
-        if (!jsonObject.isEmpty()) {
+        if (jsonObject != null && !jsonObject.isEmpty()) {
             return jsonObject.getString("HAHA");
         } else {
             return null;
