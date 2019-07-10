@@ -1,6 +1,7 @@
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.peng.wen.factory.AnimalFactory;
+import com.peng.wen.factory.AppConfig;
 import com.peng.wen.interfaces.Animal;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -42,5 +43,8 @@ public class Main {
 
         Animal elephant = (Animal)context.getBean("myElephant");
         elephant.say();
+
+        AppConfig appConfig = (AppConfig)context.getBean("appConfig");
+        appConfig.say();
     }
 }
