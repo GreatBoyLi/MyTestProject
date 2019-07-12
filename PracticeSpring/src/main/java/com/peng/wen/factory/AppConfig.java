@@ -21,6 +21,6 @@ public class AppConfig {
     }
 
     public void say(){
-        System.out.println("I name is " + this.name + " and I am "+ this.a + " years old.");
+        System.out.println("I'm AppConfig. I name is " + this.name + " and I am "+ this.a + " years old.");
     }
 }
