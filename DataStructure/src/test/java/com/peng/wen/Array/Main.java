@@ -11,7 +11,12 @@ public class Main {
         array.addFirst(1);
         array.addFirst(2);
         array.addFirst(1);
-        array.addLast(2);
+        array.addLast(8);
+        array.addLast(7);
+        array.addLast(6);
+        array.addLast(5);
+        array.addLast(4);
+        array.addLast(3);
         System.out.println(array);
         //测试remove函数
         array.removeFirst();

@@ -69,12 +69,11 @@ public class Array<E> {
      */
     public void add(int index, E e){
 
-        if (size == this.data.length){
-            throw new IllegalArgumentException("Add failed.Array is full.");
-        }
-
         if (index < 0 || index > size){
             throw new IllegalArgumentException("Add failed. Require index < 0 || index > size.");
+        }
+        if (size == this.data.length){
+            resize(2 * data.length);
         }
 
         for(int i = size; i > index; i--){
@@ -179,7 +178,11 @@ public class Array<E> {
             this.data[i - 1] = this.data[i];
         }
         this.size --;
-        this.data[size] = null;  // loitering objects !=
+        this.data[size] = null;
+
+        if (this.size == this.data.length / 2){
+            resize(this.size + this.size / 2);
+        }
         return ret;
     }
 
@@ -257,5 +260,13 @@ public class Array<E> {
         }
         res.append("]");
         return res.toString();
+    }
+
+    private void resize(int newCapacity){
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < this.size; i++){
+            newData[i] = this.data[i];
+        }
+        this.data = newData;
     }
 }
