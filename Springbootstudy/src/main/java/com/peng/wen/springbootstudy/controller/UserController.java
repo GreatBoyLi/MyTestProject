@@ -1,6 +1,7 @@
 package com.peng.wen.springbootstudy.controller;
 
 
+import com.peng.wen.springbootstudy.pojo.JSONResult;
 import com.peng.wen.springbootstudy.pojo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,19 @@ public class UserController {
         user.setDesc("I am testing.");
 
         return user;
+    }
+
+    @RequestMapping("/getUserJson")
+    @ResponseBody
+    public JSONResult getUserjson(){
+        User user = new User();
+
+        user.setName("liwpb");
+        user.setAge(25);
+        user.setBirthday(new Date());
+        user.setPassword("liwpb");
+        user.setDesc("I am testing.");
+
+        return JSONResult.build(500,"ceshiceshi",user);
     }
 }

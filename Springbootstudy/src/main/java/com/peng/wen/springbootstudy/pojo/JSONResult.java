@@ -27,21 +27,27 @@ import java.util.List;
  * @date
  * @version
  */
-@Setter
-@Getter
+
 public class JSONResult {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
+    @Setter
+    @Getter
     // 相应业务状态
     private Integer status;
 
+    @Setter
+    @Getter
     // 相应消息
     private String msg;
 
+    @Setter
+    @Getter
     // 相应中的数据
     private Object data;
+
 
 
     /**
@@ -176,12 +182,6 @@ public class JSONResult {
     public Boolean isSuccess(){
         return this.status == 200;
     }
-
-
-
-
-
-
 
     // 构造器
     public JSONResult(Integer status, String msg, Object data){
