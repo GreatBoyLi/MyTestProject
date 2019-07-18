@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @Title: JSONRESULT
+ * @Title: JsonResult
  * @Package: com.peng.wen.study.pojo
  * @Descripton: 自定义响应数据结构
  *              这个类是提供给用户，ISO，安卓，微信商城用的
@@ -28,24 +28,32 @@ import java.util.List;
  * @version
  */
 
-public class JSONResult {
+public class JsonResult {
 
-    // 定义jackson对象
+    /**
+     *定义jackson对象
+     */
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
+    /**
+     *相应业务状态
+     */
     @Setter
     @Getter
-    // 相应业务状态
     private Integer status;
 
+    /**
+     * 相应消息
+     */
     @Setter
     @Getter
-    // 相应消息
     private String msg;
 
+    /**
+     * 相应的业务数据
+     */
     @Setter
     @Getter
-    // 相应中的数据
     private Object data;
 
 
@@ -57,8 +65,8 @@ public class JSONResult {
      * @param data 业务数据
      * @return JSONREsult
      */
-    public static JSONResult build(Integer status, String msg, Object data){
-        return new JSONResult(status, msg, data);
+    public static JsonResult build(Integer status, String msg, Object data){
+        return new JsonResult(status, msg, data);
     }
 
     /**
@@ -66,16 +74,16 @@ public class JSONResult {
      * @param data 业务数据
      * @return JSONResult
      */
-    public static JSONResult success(Object data){
-        return new JSONResult(data);
+    public static JsonResult success(Object data){
+        return new JsonResult(data);
     }
 
     /**
      * @description 返回业务数据为空的成功状态的JSONResult对象
      * @return JSONREsult
      */
-    public static JSONResult success(){
-        return new JSONResult(null);
+    public static JsonResult success(){
+        return new JsonResult(null);
     }
 
     /**
@@ -83,8 +91,8 @@ public class JSONResult {
      * @param msg 错误信息
      * @return JSONREsult
      */
-    public static JSONResult errorMsg(String msg){
-        return new JSONResult(501, msg, null);
+    public static JsonResult errorMsg(String msg){
+        return new JsonResult(501, msg, null);
     }
 
     /**
@@ -92,8 +100,8 @@ public class JSONResult {
      * @param data 业务数据
      * @return JSONResult
      */
-    public static JSONResult errorMap(Object data){
-        return new JSONResult(501, "error",data);
+    public static JsonResult errorMap(Object data){
+        return new JsonResult(501, "error",data);
     }
 
     /**
@@ -101,8 +109,8 @@ public class JSONResult {
      * @param msg 错误信息
      * @return JSONREsult
      */
-    public static JSONResult errorTokenMsg(String msg){
-        return new JSONResult(502, msg, null);
+    public static JsonResult errorTokenMsg(String msg){
+        return new JsonResult(502, msg, null);
     }
 
     /**
@@ -110,8 +118,8 @@ public class JSONResult {
      * @param msg 异常信息
      * @return JSONREsult
      */
-    public static JSONResult errorException(String msg){
-        return new JSONResult(555, msg, null);
+    public static JsonResult errorException(String msg){
+        return new JsonResult(555, msg, null);
     }
 
     /**
@@ -121,10 +129,10 @@ public class JSONResult {
      * @param clazz 需要转化对应的Class类
      * @return JSONResult对象
      */
-    public static JSONResult formatToPojo(String jsonData, Class<?> clazz){
+    public static JsonResult formatToPojo(String jsonData, Class<?> clazz){
         try {
             if (clazz == null){
-                return MAPPER.readValue(jsonData,JSONResult.class);
+                return MAPPER.readValue(jsonData,JsonResult.class);
             }
             JsonNode jsonNode = MAPPER.readTree(jsonData);
             JsonNode data = jsonNode.get("data");
@@ -145,9 +153,9 @@ public class JSONResult {
      * @param json JSON字符串
      * @return JSONResult对象
      */
-    public static JSONResult format(String json){
+    public static JsonResult format(String json){
         try {
-            return MAPPER.readValue(json, JSONResult.class);
+            return MAPPER.readValue(json, JsonResult.class);
         } catch (IOException e) {
             return null;
         }
@@ -160,7 +168,7 @@ public class JSONResult {
      * @param clazz 需要转化对象的Class类
      * @return JSONResult对象
      */
-    public static JSONResult formatToList(String jsonData, Class<?> clazz){
+    public static JsonResult formatToList(String jsonData, Class<?> clazz){
         JsonNode jsonNode = null;
         try {
             jsonNode = MAPPER.readTree(jsonData);
@@ -179,19 +187,27 @@ public class JSONResult {
      * @descripton 判断JSONREsult对象是否是成功状态，成功状态返回true，失败状态范湖false
      * @return Boolean
      */
-    public Boolean isSuccess(){
+    public Boolean successOrNot(){
         return this.status == 200;
     }
 
-    // 构造器
-    public JSONResult(Integer status, String msg, Object data){
+    /**
+     * @description 传入状态、信息、业务数据的构造器
+     * @param status 状态
+     * @param msg 信息
+     * @param data 业务数据
+     */
+    public JsonResult(Integer status, String msg, Object data){
         this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
-    // 构造器
-    public JSONResult(Object data){
+    /**
+     * @description 传入业务数据的构造器
+     * @param data 业务数据
+     */
+    public JsonResult(Object data){
         this.status = 200;
         this.msg = "SUCCESS";
         this.data = data;
