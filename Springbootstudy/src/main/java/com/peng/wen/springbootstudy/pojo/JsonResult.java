@@ -1,5 +1,6 @@
 package com.peng.wen.springbootstudy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -9,9 +10,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @Title: JsonResult
- * @Package: com.peng.wen.study.pojo
- * @Descripton: 自定义响应数据结构
+ * title JsonResult
+ * Package com.peng.wen.study.pojo
+ *        自定义响应数据结构
  *              这个类是提供给用户，ISO，安卓，微信商城用的
  *              门户接收此类数据后需要使用本类的方法转换成对应的数据类型格式（类，或者List）
  *              其他自行处理
@@ -23,9 +24,8 @@ import java.util.List;
  * Copyright：
  * Company:
  *
- * @author
- * @date
- * @version
+ * @author liwpb
+ * @version 1.0
  */
 
 public class JsonResult {
@@ -59,75 +59,75 @@ public class JsonResult {
 
 
     /**
-     * @description 传入业务状态、业务信息、业务数据，返回JSONResult对象
+     * 传入业务状态、业务信息、业务数据，返回JsonResult对象
      * @param status 业务状态
      * @param msg 业务信息
      * @param data 业务数据
-     * @return JSONREsult
+     * @return JsonResult
      */
     public static JsonResult build(Integer status, String msg, Object data){
         return new JsonResult(status, msg, data);
     }
 
     /**
-     * @description 传入业务数据，返回正确状态信息
+     * 传入业务数据，返回正确状态信息
      * @param data 业务数据
-     * @return JSONResult
+     * @return JsonResult
      */
     public static JsonResult success(Object data){
         return new JsonResult(data);
     }
 
     /**
-     * @description 返回业务数据为空的成功状态的JSONResult对象
-     * @return JSONREsult
+     * 返回业务数据为空的成功状态的JsonResult对象
+     * @return JsonResult
      */
     public static JsonResult success(){
         return new JsonResult(null);
     }
 
     /**
-     * @description 返回错误信息的JSONREsult对象
+     * 返回错误信息的JsonResult对象
      * @param msg 错误信息
-     * @return JSONREsult
+     * @return JsonResult
      */
     public static JsonResult errorMsg(String msg){
         return new JsonResult(501, msg, null);
     }
 
     /**
-     * @description 返回错误信息的JSONREsult对象
+     * 返回错误信息的JsonResult对象
      * @param data 业务数据
-     * @return JSONResult
+     * @return JsonResult
      */
     public static JsonResult errorMap(Object data){
         return new JsonResult(501, "error",data);
     }
 
     /**
-     * @description 返回用户token出错信息JSONResult对象
+     * 返回用户token出错信息JsonResult对象
      * @param msg 错误信息
-     * @return JSONREsult
+     * @return JsonResult
      */
     public static JsonResult errorTokenMsg(String msg){
         return new JsonResult(502, msg, null);
     }
 
     /**
-     * @decription 返回异常信息JSONResult
+     * 返回异常信息JsonResult
      * @param msg 异常信息
-     * @return JSONREsult
+     * @return JsonResult
      */
     public static JsonResult errorException(String msg){
         return new JsonResult(555, msg, null);
     }
 
     /**
-     * @decription 将JSON结果集转化为JSONResult对象，
+     *  将JSON结果集转化为JsonResult对象，
      *             需要转化的对象是一个类
      * @param jsonData JSON字符串
      * @param clazz 需要转化对应的Class类
-     * @return JSONResult对象
+     * @return JsonResult对象
      */
     public static JsonResult formatToPojo(String jsonData, Class<?> clazz){
         try {
@@ -149,9 +149,9 @@ public class JsonResult {
     }
 
     /**
-     * @description 没有Object对象的转化
+     * 没有Object对象的转化
      * @param json JSON字符串
-     * @return JSONResult对象
+     * @return JsonResult对象
      */
     public static JsonResult format(String json){
         try {
@@ -162,11 +162,11 @@ public class JsonResult {
     }
 
     /**
-     * @decription Object是集合转化
+     *  Object是集合转化
      *             需要转化的对象是一个List
      * @param jsonData JSON字符串
      * @param clazz 需要转化对象的Class类
-     * @return JSONResult对象
+     * @return JsonResult对象
      */
     public static JsonResult formatToList(String jsonData, Class<?> clazz){
         JsonNode jsonNode = null;
@@ -184,15 +184,16 @@ public class JsonResult {
     }
 
     /**
-     * @descripton 判断JSONREsult对象是否是成功状态，成功状态返回true，失败状态范湖false
+     * 判断JsonResult对象是否是成功状态，成功状态返回true，失败状态范湖false
      * @return Boolean
      */
-    public Boolean successOrNot(){
+    @JsonIgnore
+    public Boolean isSuccess(){
         return this.status == 200;
     }
 
     /**
-     * @description 传入状态、信息、业务数据的构造器
+     * 传入状态、信息、业务数据的构造器
      * @param status 状态
      * @param msg 信息
      * @param data 业务数据
@@ -204,7 +205,7 @@ public class JsonResult {
     }
 
     /**
-     * @description 传入业务数据的构造器
+     * 传入业务数据的构造器
      * @param data 业务数据
      */
     public JsonResult(Object data){
