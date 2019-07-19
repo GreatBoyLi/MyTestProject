@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Cat extends Animal{
 
+    @Override
     public void say() {
         System.out.println("I am a cat.");
     }

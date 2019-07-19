@@ -13,6 +13,8 @@ public class Elephant extends Animal{
 
     private int age;
     private String name;
+
+    @Override
     public void say(){
         System.out.println("I am an elephant, and I have a long nose.\n     My name is " + this.name + " and I'm "
         + this.age + " years old.");
