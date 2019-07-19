@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
+/**
+ * 测试返回JSON对象，使用ResponseBody
+ */
 //@Controller
 @RestController  // @RestController =  @Controller + @ResponseBoy
 @RequestMapping("/user")

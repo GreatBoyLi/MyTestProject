@@ -23,7 +23,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -41,6 +40,30 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+
+		<!-- 热部署 -->
+		<!-- devtools可以实现页面热部署（即页面修改后立即生效，这个可以直接在application.properties文件中配置
+		     spring.thymeleaf.cache=false来实现）-->
+		<!-- 实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。 -->
+		<!-- devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存机制），
+		     注意：因为其采用的虚拟机机制，该项重启是很快的。 -->
+		<!-- （1）base classloader （Base类加载器）：加载不改变的Class，例如第三方提供的jar包。 -->
+		<!-- （2）restart classloader （Restart类加载器）：加载正在开发的Class。 -->
+		<!-- 为什么重启很快，因为重启的时候只是加载了在开发的Class，没有重新加载第三方的jar包。 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<!-- option=true，依赖不会传递，该项目依赖devtools；
+			     之后的项目依赖boot的项目如果想要使用devtools，需要重新引入-->
+			<optional>true</optional>
+		</dependency>
+
+		<!-- 资源文件中的属性配置映射到实体类 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

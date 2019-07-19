@@ -56,8 +56,6 @@ public class JsonResult {
     @Getter
     private Object data;
 
-
-
     /**
      * 传入业务状态、业务信息、业务数据，返回JsonResult对象
      * @param status 业务状态
