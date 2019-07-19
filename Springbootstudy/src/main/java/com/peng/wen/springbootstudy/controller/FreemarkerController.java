@@ -25,7 +25,7 @@ public class FreemarkerController {
      * @return String .ftl文件的位置
      */
     @RequestMapping("/index")
-    public String index(ModelMap map){
+    public String index(ModelMap map){ // ModelMap 与ModelAndView类似
         map.addAttribute("resource",resource);
         return "freemarker/index";
     }
