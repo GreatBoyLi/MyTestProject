@@ -9,6 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  * Resource类，用来接收resource.properties文件的属性
+ * @author liwpb
  */
 @Configuration //代表会引用资源文件的配置
 @ConfigurationProperties(prefix="com.peng.wen.opensource")  //设置属性前缀

@@ -3,23 +3,24 @@ package com.peng.wen.springbootstudy.controller;
 
 import com.peng.wen.springbootstudy.pojo.JsonResult;
 import com.peng.wen.springbootstudy.pojo.User;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
 /**
  * 测试返回JSON对象，使用ResponseBody
+ * @author liwpb
  */
-//@Controller
-@RestController  // @RestController =  @Controller + @ResponseBoy
+@RestController  // @RestController =  @Controller + @ResponseBoy  @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    @RequestMapping("/getUser")
-   // @ResponseBody   //此注解标识着，返回的数据是以JSON对象为主
+    /**
+     * 测试返回Json对象
+     * @return User
+     */
+    @RequestMapping("/getUser")// @ResponseBody   //此注解标识着，返回的数据是以JSON对象为主
     public User getUser(){
         User user = new User();
 
@@ -31,6 +32,11 @@ public class UserController {
 
         return user;
     }
+
+    /**
+     * 测试返回Json对象
+     * @return User
+     */
     @RequestMapping("/getUserJson")
     public JsonResult getUserjson(){
         User user = new User();

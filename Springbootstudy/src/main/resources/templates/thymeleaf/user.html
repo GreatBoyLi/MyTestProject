@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+
+    <script th:src="@{/static/js/test.js}"></script>
+</head>
+<body>
+    <div>
+        用户姓名：<input th:id="${user.name}" th:name="${user.name}" th:value="${user.name}"/><br/>
+        用户年龄：<input th:value="${user.age}"/><br/>
+        用户生日：<input th:value="${user.birthday}"><br/>
+        用户生日：<input th:value="${#dates.format(user.birthday, 'yyyy-mm-dd')}">
+    </div>
+
+<br/>
+
+<div th:object="${user}">
+    用户姓名：<input th:id="*{name}" th:name="*{name}" th:value="*{name}">
+    用户年龄：<input th:value="*{age}">
+    用户生日：<input th:value="*{#dates.format(birthday, 'yyyy-mm-dd')}">
+</div>
+
+<br/>
+
+text 与 utext： <br/>
+<span th:text="${user.desc}"/>
+<br/>
+<span th:utext="${user.desc}"/>
+
+<br/>
+
+URL<br/>
+<a href="http://www.imooc.com">网站地址</a>
+<br/>
+<a th:href="@{http://www.imooc.com}">TF模板网站地址</a>
+
+<br/>
+
+<form th:action="@{/th/postform}" th:object="${user}" method="post" th:method="post">
+    输入姓名：<input type="text" th:field="*{name}"/> <!-- field标签代表 id = name  name = name  value = 获取的值 -->
+    <br/>
+    <input type="submit">
+</form>
+
+<div th:if="${user.age} == 18">十八岁的天空</div>
+<div th:if="${user.age} gt 18">大于18</div>
+<div th:if="${user.age} lt 18">小于18</div>
+<div th:if="${user.age} ge 18">大于等于18</div>
+<div th:if="${user.age} le 18">小于等于18</div>
+<br/>
+
+<select>
+    <option th:selected="${user.name eq 'liwpb'}">liwpb</option>
+    <option th:selected="${user.name eq 'imooc'}">imocc</option>
+</select>
+
+<table>
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>年龄备注</th>
+        <th>生日</th>
+    </tr>
+    <tr th:each="person:${userList}">
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.age}"></td>
+        <td th:text="${person.age} gt 18 ? 你老了 : 你很年轻">18岁</td>
+        <td th:text="${#dates.format(user.birthday, 'yyyy-mm-dd')}"></td>
+    </tr>
+</table>
+<br/>
+<div th:switch="${user.name}">
+    <p th:case="#{roles.superadmin}">超级管理员</p>
+    <p th:case="#{roles.manager}">普通管理员</p> <!-- 资源文件配置 需要在application.properties文件中配置 -->
+    <p th:case="*" th:text="${user.name}">其他用户</p>
+</div>
+</body>
+</html>
