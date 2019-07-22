@@ -180,8 +180,8 @@ public class Array<E> {
         this.size --;
         this.data[size] = null;
 
-        if (this.size == this.data.length / 2){
-            resize(this.size + this.size / 2);
+        if (this.size == this.data.length / 4 && this.data.length / 2 != 0){
+            resize(this.data.length / 2);
         }
         return ret;
     }
