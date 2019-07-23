@@ -59,9 +59,18 @@ public class CourseController {
         return "course_overview";
     }
 
-
+    /**
+     * 通过传统的HttpServeltRequest请求方式处理
+     * @param request HttpServletRequest请求
+     * @return 页面地址
+     */
+    @RequestMapping("/view1")
     public String viewCourse(HttpServletRequest request){
-        return null;
+        Integer courseId = Integer.valueOf(request.getParameter("courseId"));
+        Course course = courseService.getCourseById(courseId);
+        request.setAttribute("course",course);
+        System.out.println("liwpb" + request.getContextPath());
+        return "course_overview";
     }
 
 }
