@@ -1,8 +1,19 @@
 package com.peng.wen.Array;
 
+/**
+ * 疯转的数组
+ * @param <E>
+ */
 public class Array<E> {
 
+    /**
+     * Array的数组
+     */
     private E[] data;
+
+    /**
+     * Array大小
+     */
     private int size;
 
 
@@ -93,6 +104,22 @@ public class Array<E> {
             throw new IllegalArgumentException("Get failed. Index is illegal.");
         }
         return this.data[index];
+    }
+
+    /**
+     * 获取最后一个元素
+     * @return E
+     */
+    public E getLast(){
+        return get(this.size - 1);
+    }
+
+    /**
+     * 获取第一个元素
+     * @return E
+     */
+    public E getFirst(){
+        return get(0);
     }
 
     /**
@@ -247,6 +274,10 @@ public class Array<E> {
         return true;
     }
 
+    /**
+     * 重写toString()方法
+     * @return String
+     */
     @Override
     public String toString(){
         StringBuilder res = new StringBuilder();
@@ -262,6 +293,10 @@ public class Array<E> {
         return res.toString();
     }
 
+    /**
+     * 数组扩容的方法，对象内部调用
+     * @param newCapacity 新的容量
+     */
     private void resize(int newCapacity){
         E[] newData = (E[]) new Object[newCapacity];
         for (int i = 0; i < this.size; i++){
