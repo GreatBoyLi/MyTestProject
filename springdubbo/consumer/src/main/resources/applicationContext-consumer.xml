@@ -14,7 +14,11 @@
     <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
     <dubbo:application name="consumer-of-helloworld-app"  />
 
+    <!-- 使用Zookeeper进行注册中心化 -->
+    <dubbo:registry address="zookeeper://localhost:2181"/>
+
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
-    <dubbo:reference id="consumerService" interface="com.peng.wen.dubbo.ServiceAPI" url="dubbo://localhost:20880"/>
+    <dubbo:reference id="consumerService" interface="com.peng.wen.dubbo.ServiceAPI"/>
+    <!-- 直连的时候   url="dubbo://localhost:20880" -->
 
 </beans>
