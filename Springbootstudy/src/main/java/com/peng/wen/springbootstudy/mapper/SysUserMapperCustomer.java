@@ -5,5 +5,7 @@ import com.peng.wen.springbootstudy.utils.MyMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface SysUserMapper extends MyMapper<SysUser> {
+public interface SysUserMapperCustomer extends MyMapper<SysUser> {
+
+    SysUser queryUserInfo(Integer id);
 }
