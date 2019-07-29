@@ -15,6 +15,6 @@ public class LoopQueueTest {
         }
         System.out.println(queue.toString());
 
-        queue.dequeue();
+//        queue.dequeue();
     }
 }

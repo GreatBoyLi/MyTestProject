@@ -119,7 +119,7 @@ public class LoopQueue<E> implements Queue<E>{
      */
     @Override
     public boolean isEmpty() {
-        return this.front == this.size;
+        return this.front == this.tail;
     }
 
     /**
