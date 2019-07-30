@@ -124,4 +124,121 @@ public class LinkedList<E> {
         this.addNode(this.size, e);
     }
 
+    /**
+     * 获得链表的第index个元素
+     * @param index 索引
+     * @return E
+     */
+    public E get(int index){
+        if (index < 0 || index > this.size){
+            throw new IllegalArgumentException("Get failed, Illegal inedex.");
+        }
+        Node currentNode = dummyHead.next;
+        for (int i = 1; i <= index; i++){
+            currentNode = currentNode.next;
+        }
+        return currentNode.e;
+    }
+
+    /**
+     * 获得第一个元素
+     * @return E
+     */
+    public E getFirst(){
+        return this.get(0);
+    }
+
+    /**
+     * 获得最后的元素
+     * @return E
+     */
+    public E getLast(){
+        return this.get(this.size);
+    }
+
+    /**
+     * 修改指定索引的元素
+     * @param index 索引
+     * @param e 元素
+     */
+    public void set(int index, E e){
+        if (index < 0 || index > this.size){
+            throw new IllegalArgumentException("Update failed, Illegal inedex.");
+        }
+        Node currentNode = dummyHead.next;
+        for (int i = 0; i < index; i++){
+            currentNode = currentNode.next;
+        }
+        currentNode.e = e;
+    }
+
+    /**
+     * 判断链表内是否存在元素e
+     * @param e 元素
+     * @return boolean
+     */
+    public boolean contains(E e){
+        Node currentNode = dummyHead.next;
+        while(currentNode != null){
+            if (currentNode.e.equals(e)){
+                return true;
+            }
+            currentNode = currentNode.next;
+        }
+        return false;
+    }
+
+    /**
+     * 删除指定索引的元素
+     * @param index 索引
+     * @return E
+     */
+    public E remove(int index){
+        if (index < 0 || index >= this.size){
+            throw new IllegalArgumentException("Remove failed, Illegal inedex.");
+        }
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++){
+            prev = prev.next;
+        }
+        Node delNode = prev.next;
+        prev.next = delNode.next;
+        delNode.next = null;
+        this.size --;
+        return delNode.e;
+    }
+
+    /**
+     * 删除链表第一个元素
+     * @return E
+     */
+    public E remvoeFirst(){
+        return this.remove(0);
+    }
+
+    /**
+     * 删除链表最后一个元素
+     * @return E
+     */
+    public E removeLast(){
+        return this.remove(this.size - 1);
+    }
+
+    /**
+     * 覆盖toString()方法
+     * @return String
+     */
+    @Override
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+        res.append("LinkedNode: ");
+        Node currentNode = dummyHead.next;
+//        for (Node cur = dummyHead.next; cur != null; cur = cur.next)
+        while(currentNode != null){
+            res.append(currentNode).append("->");
+            currentNode = currentNode.next;
+        }
+        res.append("NULL");
+        return res.toString();
+    }
 }
