@@ -56,7 +56,7 @@ public class LinkedList<E> {
     /**
      * 链表的头
      */
-    private Node head;
+    private Node dummyHead;
 
     /**
      * 链表中元素的数量
@@ -67,7 +67,7 @@ public class LinkedList<E> {
      * 无参的构造函数
      */
     public LinkedList(){
-        this.head = null;
+        this.dummyHead = new Node(null, null);
         this.size = 0;
     }
 
@@ -94,11 +94,7 @@ public class LinkedList<E> {
      * @param e 添加的元素
      */
     public void addFirst(E e){
-//        Node node = new Node(e,this.head);
-//        this.head = node;
-
-        this.head = new Node(e, this.head);
-        this.size ++;
+        this.addNode(0,e);
     }
 
     /**
@@ -111,17 +107,13 @@ public class LinkedList<E> {
         if (index < 0 || index > this.size){
             throw new IllegalArgumentException("Add failed, Illegal inedex.");
         }
-        if (index == 0){
-            this.addFirst(e);
-        }else {
-            Node prev = this.head;
-            for (int i = 0; i < index - 1; i++) {
-                prev = prev.next;
-            }
-            prev.next = new Node(e, prev.next);
-
-            this.size ++;
+        Node prev = this.dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
         }
+        prev.next = new Node(e, prev.next);
+
+        this.size ++;
     }
 
     /**
