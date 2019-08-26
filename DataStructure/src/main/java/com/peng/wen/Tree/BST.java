@@ -58,7 +58,7 @@ public class BST<E extends Comparable<E>>{
 //        }else {
 //            add1(root, e);
 //        }
-        add2(root,e);
+        root = add2(root,e);
     }
 
     /**
@@ -132,5 +132,89 @@ public class BST<E extends Comparable<E>>{
                 break;
             }
         }
+    }
+
+    /**
+     * 判断二分搜索树是否包含元素e
+     * @param e 元素 e
+     * @return boolean
+     */
+    public boolean contains(E e){
+        return contains(root, e);
+    }
+
+    /**
+     * 判断元素e是存在以node为根节点的二分搜索树中
+     * @param node 根节点
+     * @param e 元素e
+     * @return boolean
+     */
+    private boolean contains(Node node, E e){
+        if (node == null){
+            return false;
+        }
+        if(node.e.compareTo(e) == 0){
+            return true;
+        }
+        if (e.compareTo(node.e) > 0){
+            return contains(node.right, e);
+        }else{
+            return contains(node.left, e);
+        }
+    }
+
+    /**
+     * 前序遍历
+     */
+    public void preOrder(){
+        preOrder(root);
+    }
+
+    /**
+     * 前序遍历以root为根的二分搜索树，递归算法
+     * @param root 根节点
+     */
+    private void preOrder(Node root){
+        if (root == null){
+            return;
+        }
+        System.out.println(root.e);
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    /**
+     * 重写toString方法
+     * @return String
+     */
+    @Override
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+        generateBSTString(root, 0, res);
+        return res.toString();
+    }
+
+    /**
+     * 生成以node为根节点，深度为depth的描述二叉树的字符串
+     * @param root 根节点
+     * @param depth 深度
+     * @param res StringBuilder
+     */
+    private void generateBSTString(Node root, int depth, StringBuilder res){
+        if (root == null){
+            res.append(generateDepthString(depth) + "null\n");
+            return;
+        }
+        res.append(generateDepthString(depth) + root.e + "\n");
+        generateBSTString(root.left, depth + 1, res);
+        generateBSTString(root.right, depth + 1, res);
+    }
+
+    private String generateDepthString(int depth){
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < depth; i++){
+            res.append("--");
+        }
+        return res.toString();
     }
 }

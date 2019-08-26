@@ -10,12 +10,7 @@ public class BSTTest {
         bst.add(35);
         bst.add(79);
 
-        Integer a = 2;
-        Integer b = 3;
-System.out.println(a + "    " + b);
-    }
-    public static void add(Integer a, Integer b){
-        a =4;
-        b=6;
+        bst.preOrder();
+        System.out.println(bst.toString());
     }
 }
