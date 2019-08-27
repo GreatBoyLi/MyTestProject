@@ -184,6 +184,46 @@ public class BST<E extends Comparable<E>>{
     }
 
     /**
+     * 中序遍历
+     */
+    public void inOrder(){
+        inOrder(root);
+    }
+
+    /**
+     * 中序遍历以root为根的二分搜索树，递归算法
+     * @param root 根节点
+     */
+    private void inOrder(Node root){
+        if (root == null){
+            return;
+        }
+        inOrder(root.left);
+        System.out.println(root.e);
+        inOrder(root.right);
+    }
+
+    /**
+     * 后序遍历
+     */
+    public void postOrder(){
+        postOrder(root);
+    }
+
+    /**
+     * 后序遍历以root为根的二分搜索树，递归算法
+     * @param root 根节点
+     */
+    private void postOrder(Node root){
+        if (root == null){
+            return;
+        }
+        postOrder(root.left);
+        postOrder(root.right);
+        System.out.println(root.e);
+    }
+
+    /**
      * 重写toString方法
      * @return String
      */
