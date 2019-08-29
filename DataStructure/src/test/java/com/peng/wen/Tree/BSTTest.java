@@ -12,6 +12,8 @@ public class BSTTest {
 
         System.out.println("前序遍历");
         bst.preOrder();
+        System.out.println();
+        bst.preOrderNR();
         System.out.println("中序遍历");
         bst.inOrder();
         System.out.println("后序遍历");

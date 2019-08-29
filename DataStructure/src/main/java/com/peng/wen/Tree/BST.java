@@ -1,5 +1,7 @@
 package com.peng.wen.Tree;
 
+import java.util.Stack;
+
 public class BST<E extends Comparable<E>>{
 
     private class Node{
@@ -181,6 +183,24 @@ public class BST<E extends Comparable<E>>{
         System.out.println(root.e);
         preOrder(root.left);
         preOrder(root.right);
+    }
+
+    /**
+     * 前序遍历，非递归方法
+     */
+    public void preOrderNR(){
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(root);
+        while(!stack.empty()){
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+            if (cur.right != null) {
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
     }
 
     /**
