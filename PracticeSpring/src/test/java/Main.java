@@ -46,5 +46,18 @@ public class Main {
 
         AppConfig appConfig = (AppConfig)context.getBean("appConfig");
         appConfig.say();
+
+        System.out.println("****************************测试*****************************");
+        Animal dog1 = (Animal)context.getBean("dog");
+        dog1.say();
+        Animal dog2 = (Animal)context.getBean("myDog");
+        dog2.say();
+        try {
+            Animal dog3 = (Animal)context.getBean("myDoqqg");
+            dog3.say();
+        }catch(Exception e){
+            System.out.println("不报错。");
+        }
+
     }
 }

@@ -16,6 +16,24 @@ public class Dog extends Animal{
     private String name;
 
     @Override
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
     public void say() {
         System.out.println("I am a dog.My name is " + this.name + " and I'm " + this.age + " years old.");
     }
