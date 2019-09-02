@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 操作ZK节点
+ * 操作ZK节点，创建和删除操作
  */
 public class ZKNodeOperator implements Watcher{
 
