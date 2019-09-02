@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * 连接zk服务器的演示demo
+ */
 public class ConnectZookeeper implements Watcher {
 
     private static final Logger log = LoggerFactory.getLogger(ConnectZookeeper.class);
