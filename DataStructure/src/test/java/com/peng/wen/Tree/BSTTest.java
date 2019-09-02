@@ -18,6 +18,8 @@ public class BSTTest {
         bst.inOrder();
         System.out.println("后序遍历");
         bst.postOrder();
+        System.out.println("广度优先遍历");
+        bst.levelOrder();
         //System.out.println(bst.toString());
     }
 }
