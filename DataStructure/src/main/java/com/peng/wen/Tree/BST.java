@@ -264,6 +264,90 @@ public class BST<E extends Comparable<E>>{
     }
 
     /**
+     * 寻找二分搜索树的最小元素
+     * @return E
+     */
+    public E minimum(){
+        if (root == null){
+            throw new IllegalArgumentException("The BST is empty");
+        }
+        Node cur = root;
+        while(cur.left != null){
+            cur = cur.left;
+        }
+        return cur.e;
+    }
+
+    /**
+     * 寻找二分搜索的最大元素
+     * @return E
+     */
+    public E maxmum(){
+        if (root == null){
+            throw new IllegalArgumentException("The BST is empty");
+        }
+        Node cur = root;
+        while(cur.right != null){
+            cur = cur.right;
+        }
+        return cur.e;
+    }
+
+    /**
+     * 从二分搜索树中删除最小值所在节点，返回最小值
+     * @return E
+     */
+    public E removeMin(){
+        E ret = minimum();
+
+        root = removeMin(root);
+
+        return ret;
+    }
+    /**
+     * 删除掉以root为根的二分搜索树中最小节点，返回删除节点后新的二分搜索树的根
+     * @param root 根节点
+     * @return 根节点
+     */
+    private Node removeMin(Node root){
+        if (root.left == null){
+            Node rightNode = root.right;
+            root.right = null;
+            size--;
+            return rightNode;
+        }
+        root.left = removeMin(root.left);
+        return root;
+    }
+
+    /**
+     * 从二分搜索树中删除最大值所在节点
+     * @return E
+     */
+    public E removeMax(){
+        E ret = maxmum();
+
+        root = removeMax(root);
+
+        return ret;
+    }
+    /**
+     * 删除掉以root为根的二分搜索树中最大的接节点，返回删除节点后新的二分搜索树的根
+     * @param root 根节点
+     * @return 根节点
+     */
+    private Node removeMax(Node root){
+        if (root.right == null){
+            Node leftNode = root.left;
+            root.left = null;
+            size --;
+            return leftNode;
+        }
+        root.right = removeMax(root.right);
+        return root;
+    }
+
+    /**
      * 重写toString方法
      * @return String
      */

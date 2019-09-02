@@ -20,6 +20,12 @@ public class BSTTest {
         bst.postOrder();
         System.out.println("广度优先遍历");
         bst.levelOrder();
+        Integer a = (Integer) bst.removeMin();
+        System.out.println("删除最小值 " + a);
+        bst.inOrder();
+        int b = (Integer) bst.removeMax();
+        System.out.println("删除最大值 " + b);
+        bst.inOrder();
         //System.out.println(bst.toString());
     }
 }
