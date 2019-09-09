@@ -279,6 +279,30 @@ public class BST<E extends Comparable<E>>{
     }
 
     /**
+     * 查询指定根节点的二分搜索树中最小节点
+     * @param root 根节点
+     * @return Node
+     */
+    private Node minimum(Node root){
+        if (root.left == null){
+            return root;
+        }
+        return minimum(root.left);
+    }
+
+    /**
+     * 查询指定根节点的二分搜索树中最大节点
+     * @param root 根节点
+     * @return Node
+     */
+    private Node maxmum(Node root){
+        if (root.right == null){
+            return root;
+        }
+        return maxmum(root.right);
+    }
+
+    /**
      * 寻找二分搜索的最大元素
      * @return E
      */
@@ -345,6 +369,55 @@ public class BST<E extends Comparable<E>>{
         }
         root.right = removeMax(root.right);
         return root;
+    }
+
+    /**
+     * 删除元素E节点
+     * @param e 元素e
+     */
+    public void remove(E e){
+        root = remove(root, e);
+    }
+
+    /**
+     * 删除以root为根的二分搜索树中的e节点，递归方法
+     * @param root 根节点
+     * @param e 元素e
+     * @return Node
+     */
+    private Node remove(Node root, E e){
+        if(root == null){
+            return null;
+        }
+        if (e.compareTo(root.e) < 0){
+            root.left = remove(root.left, e);
+            return root;
+        }else if(e.compareTo(root.e) > 0){
+            root.right = remove(root.right, e);
+            return root;
+        }else{
+            if (root.left == null){ //左子树为空
+                Node rightNode = root.right;
+                root.right = null;
+                size --;
+                return  rightNode;
+            }
+            if (root.right == null){ //右子数为空
+                Node leftNode = root.left;
+                root.left = null;
+                size --;
+                return leftNode;
+            }
+            // 待删除节点左右子树均不为空的情况
+            // 找到比待删除节点大的最小节点，即待删除节点右子树的最小节点
+            // 用这个节点顶替待删除节点的位置
+            Node successor = minimum(root.right);
+            successor.right = removeMin(root.right);
+            successor.left = root.left;
+            root.left = null;
+            root.right = null;
+            return successor;
+        }
     }
 
     /**
