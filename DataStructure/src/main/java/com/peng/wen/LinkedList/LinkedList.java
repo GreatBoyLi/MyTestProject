@@ -224,6 +224,25 @@ public class LinkedList<E> {
         return this.remove(this.size - 1);
     }
 
+    public boolean removeElement(E e){
+        boolean isExist = false;
+        Node pre = dummyHead.next;
+        while(pre.next != null){
+            if (pre.next.e.equals(e)){
+                isExist = true;
+                break;
+            }
+            pre = pre.next;
+        }
+        if (isExist){
+            Node node = pre.next.next;
+            pre.next.next = null;
+            pre.next = node;
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 覆盖toString()方法
      * @return String
