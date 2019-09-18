@@ -107,8 +107,11 @@ public class LinkedListMap<K, V> implements Map<K, V>{
         while(cur != null){
             if (cur.key.equals(key)){
                 cur.value = value;
+                return;
             }
+            cur = cur.next;
         }
+        throw new IllegalArgumentException(key + " doesn't exist.");
     }
 
     /**
