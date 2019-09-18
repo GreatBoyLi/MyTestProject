@@ -47,6 +47,9 @@ public class LinkedListMap<K, V> implements Map<K, V>{
      */
     @Override
     public void add(K key, V value) {
+        if (contains(key)) {
+            throw new IllegalArgumentException("This map has containted th key.");
+        }
         dummyHead.next = new Node(key, value, dummyHead.next);
         size++;
     }
@@ -60,14 +63,12 @@ public class LinkedListMap<K, V> implements Map<K, V>{
     @Override
     public V remove(K key) {
         Node cur = dummyHead;
-        boolean exist = false;
         while(cur.next != null){
             if (cur.next.key.equals(key)){
                 Node delNode = cur.next;
                 Node nextNode = cur.next.next;
                 cur.next.next = null;
                 cur.next = nextNode;
-                exist = true;
                 size--;
                 return delNode.value;
             }
@@ -103,6 +104,11 @@ public class LinkedListMap<K, V> implements Map<K, V>{
     @Override
     public void set(K key, V value) {
         Node cur = dummyHead.next;
+        while(cur != null){
+            if (cur.key.equals(key)){
+                cur.value = value;
+            }
+        }
     }
 
     /**
