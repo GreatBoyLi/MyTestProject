@@ -48,7 +48,7 @@ public class LinkedListMap<K, V> implements Map<K, V>{
     @Override
     public void add(K key, V value) {
         if (contains(key)) {
-            throw new IllegalArgumentException("This map has containted th key.");
+            throw new IllegalArgumentException("This map has containted the key : " + key + ".");
         }
         dummyHead.next = new Node(key, value, dummyHead.next);
         size++;
