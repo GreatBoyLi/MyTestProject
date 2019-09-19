@@ -1,11 +1,35 @@
 package com.peng.wen.map;
 
 /**
- *
+ * map
  * @param <K>
  * @param <V>
  */
-public class BSTMap<K, V> implements Map<K, V>{
+public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
+
+    private class Node{
+        K key;
+        V value;
+        Node left;
+        Node right;
+
+        public Node(K key, V value){
+            this.key = key;
+            this.value = value;
+            left = null;
+            right = null;
+        }
+    }
+
+    /** the root of tree */
+    private Node root;
+    /** size of map */
+    private int size;
+
+    public BSTMap(){
+        root = null;
+        size = 0;
+    }
     /**
      * 添加值
      *
@@ -14,7 +38,25 @@ public class BSTMap<K, V> implements Map<K, V>{
      */
     @Override
     public void add(K key, V value) {
-
+        add(root, key, value);
+    }
+    /** 递归方法向以root为空的树中增加元素 */
+    private void add(Node root, K key, V value){
+        if (key.compareTo(root.key) < 0){
+            if (root.left == null){
+                root.left = new Node(key, value);
+                size ++;
+            }else{
+                add(root.left, key, value);
+            }
+        }else if (key.compareTo(root.key) > 0){
+            if (root.right == null){
+                root.right = new Node(key, value);
+                size ++;
+            }else{
+                add(root.right, key, value);
+            }
+        }
     }
 
     /**
@@ -36,9 +78,21 @@ public class BSTMap<K, V> implements Map<K, V>{
      */
     @Override
     public boolean contains(K key) {
-        return false;
+        return contains(root, key);
     }
-
+    /** 递归方法，判断以root为空的树是否包含key值 */
+    private boolean contains(Node root, K key){
+        if (root == null){
+            return false;
+        }
+        if (root.key.compareTo(key) == 0){
+            return true;
+        }else if (key.compareTo(root.key) < 0){
+            return contains(root.left, key);
+        }else{
+            return contains(root.right, key);
+        }
+    }
     /**
      * 设置key对应的值
      *
