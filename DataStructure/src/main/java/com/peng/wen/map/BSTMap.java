@@ -13,7 +13,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
         Node left;
         Node right;
 
-        public Node(K key, V value){
+        private Node(K key, V value){
             this.key = key;
             this.value = value;
             left = null;
@@ -38,6 +38,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public void add(K key, V value) {
+        if (root == null){
+            root = new Node(key, value);
+            size ++;
+        }
         add(root, key, value);
     }
     /** 递归方法向以root为空的树中增加元素 */
@@ -67,7 +71,63 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public V remove(K key) {
-        return null;
+        Node node = contains(root, key);
+        root = remove(root, key);
+        return node.value;
+    }
+    /** 递归删除节点 */
+    private Node remove(Node root, K key){
+        if (root == null){
+            return null;
+        }
+        if (key.compareTo(root.key) < 0){
+            root.left = remove(root.left, key);
+            return root;
+        }else if (key.compareTo(root.key) > 0){
+            root.right = remove(root.right, key);
+            return root;
+        }else{
+            if (root.left == null){
+                // 如果左子树为空
+                Node right = root.right;
+                root.right = null;
+                size --;
+                return right;
+            }else if (root.right == null){
+                // 如果右子树为空
+                Node left = root.left;
+                root.left = null;
+                size --;
+                return left;
+            }else{
+                // 左右子树都不为空
+                Node minimum = minimum(root.right);
+                minimum.right = removeMin(root.right);
+                minimum.left = root.left;
+                root.left = null;
+                root.right = null;
+                size --;
+                return minimum;
+            }
+        }
+    }
+
+    /** 获得最小值 */
+    private Node minimum(Node root){
+        if (root.left == null){
+            return root;
+        }
+        return minimum(root.left);
+    }
+    /** 删除最小值 */
+    private Node removeMin(Node root){
+        if (root.left == null){
+            Node right = root.right;
+            root.right = null;
+            return right;
+        }
+        root.left = removeMin(root.left);
+        return root;
     }
 
     /**
@@ -78,15 +138,16 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public boolean contains(K key) {
-        return contains(root, key);
+        Node node = contains(root, key);
+        return node == null;
     }
-    /** 递归方法，判断以root为空的树是否包含key值 */
-    private boolean contains(Node root, K key){
+    /** 递归方法，判断以root为根的树是否包含key值 */
+    private Node contains(Node root, K key){
         if (root == null){
-            return false;
+            return null;
         }
         if (root.key.compareTo(key) == 0){
-            return true;
+            return root;
         }else if (key.compareTo(root.key) < 0){
             return contains(root.left, key);
         }else{
@@ -101,7 +162,20 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public void set(K key, V value) {
-
+        set(root, key, value);
+    }
+    /** 递归方法，设置以root为根的树中key对应的value值 */
+    private void set(Node root, K key, V value){
+        if (root == null){
+            return;
+        }else if (root.key.compareTo(key) == 0){
+            root.value = value;
+            return;
+        }else if (key.compareTo(root.key) < 0){
+            set(root.left, key, value);
+        }else{
+            set(root.right, key, value);
+        }
     }
 
     /**
@@ -111,7 +185,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public int getSize() {
-        return 0;
+        return size;
     }
 
     /**
@@ -121,7 +195,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     /**
@@ -132,6 +206,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public V get(K key) {
-        return null;
+        Node node = contains(root, key);
+        return node.value;
     }
 }

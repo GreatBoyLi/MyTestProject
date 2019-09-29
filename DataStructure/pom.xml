@@ -7,6 +7,15 @@
     <groupId>com.peng.wen</groupId>
     <artifactId>DataStructure</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
