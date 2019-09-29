@@ -139,7 +139,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
     @Override
     public boolean contains(K key) {
         Node node = contains(root, key);
-        return node == null;
+        return node != null;
     }
     /** 递归方法，判断以root为根的树是否包含key值 */
     private Node contains(Node root, K key){
