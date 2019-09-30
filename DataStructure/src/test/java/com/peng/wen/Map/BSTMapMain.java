@@ -15,5 +15,7 @@ public class BSTMapMain {
         map.add("8","8");
         map.remove("6");
         System.out.println(map.get("6"));
+        map.set("5","50");
+        System.out.println(map.get("5"));
     }
 }

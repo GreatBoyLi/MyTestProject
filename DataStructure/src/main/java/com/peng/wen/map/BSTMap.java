@@ -72,8 +72,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
     @Override
     public V remove(K key) {
         Node node = contains(root, key);
-        root = remove(root, key);
-        return node.value;
+        if (node != null) {
+            root = remove(root, key);
+            return node.value;
+        }
+        return null;
     }
     /** 递归删除节点 */
     private Node remove(Node root, K key){
@@ -162,20 +165,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
      */
     @Override
     public void set(K key, V value) {
-        set(root, key, value);
-    }
-    /** 递归方法，设置以root为根的树中key对应的value值 */
-    private void set(Node root, K key, V value){
-        if (root == null){
-            return;
-        }else if (root.key.compareTo(key) == 0){
-            root.value = value;
-            return;
-        }else if (key.compareTo(root.key) < 0){
-            set(root.left, key, value);
-        }else{
-            set(root.right, key, value);
-        }
+       Node node = contains(root, key);
+       if (node == null){
+           throw new IllegalArgumentException(key + " doesn't exist!");
+       }
+       node.value = value;
     }
 
     /**
@@ -207,6 +201,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V>{
     @Override
     public V get(K key) {
         Node node = contains(root, key);
-        return node.value;
+        return node == null ? null : node.value;
     }
 }
