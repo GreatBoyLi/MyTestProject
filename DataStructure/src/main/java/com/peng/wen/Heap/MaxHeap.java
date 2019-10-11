@@ -40,7 +40,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * 判断堆是否为空
      * @return boolean
      */
-    public boolean isEmpth(){
+    public boolean isEmpty(){
         return data.isEmpty();
     }
 
