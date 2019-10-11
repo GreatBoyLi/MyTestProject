@@ -1,6 +1,7 @@
 package com.peng.wen.Heap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MaxHeap<E extends Comparable<E>> {
     private ArrayList<E> data;
@@ -13,6 +14,18 @@ public class MaxHeap<E extends Comparable<E>> {
     /** 无参的构造函数 */
     public MaxHeap(){
         data = new ArrayList<E>();
+    }
+
+    /**
+     * 传入一个数组，构建成最大堆  Heapify
+     * @param arr 数组
+     */
+    public MaxHeap(E[] arr){
+        data = new ArrayList<E>(Arrays.asList(arr));
+        int index = parent(data.size() - 1);
+        for (int i = index; i >= 0; i --){
+            siftDown(i);
+        }
     }
 
     /**
