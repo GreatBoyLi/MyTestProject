@@ -20,7 +20,7 @@ public class SegmentTree<E>{
 
         buildSegmentTree(0, 0, data.length - 1);
     }
-    /** 在treeIndex的位置常见表示区间[l...r]的线段树 */
+    /** 在treeIndex的位置表示创建区间[l...r]的线段树 */
     private void buildSegmentTree(int treeIndex,int l, int r){
         if(l == r){
             tree[treeIndex] = data[l];
@@ -37,7 +37,7 @@ public class SegmentTree<E>{
     }
 
     /**
-     * 查询去缉拿queryL到queryR的值
+     * 查询区间ueryL到queryR的值
      * @param queryL 左边界
      * @param queryR 有边界
      * @return E
