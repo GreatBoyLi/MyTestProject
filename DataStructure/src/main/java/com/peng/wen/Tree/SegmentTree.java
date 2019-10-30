@@ -70,6 +70,35 @@ public class SegmentTree<E>{
     }
 
     /**
+     * 将index位置的值，更新为e
+     * @param index int
+     * @param e E
+     */
+    public void set(int index, E e){
+        if (index < 0 || index >= data.length){
+            throw new IllegalArgumentException("Index is illegal.");
+        }
+        data[index] = e;
+        set(0, 0, data.length - 1, index, e);
+    }
+    /** 递归更新平衡树,在以treeIndex为根的线段树中更新index的值为e */
+    private void set(int treeIndex, int l, int r, int index, E e){
+        if(l == r){
+            tree[treeIndex] = e;
+            return;
+        }
+        int mid = l + (l + r) / 2;
+        int leftTreeIndex = leftChild(treeIndex);
+        int rightTreeIndex = rightChild(treeIndex);
+        if (treeIndex >= mid){
+            set(rightTreeIndex, mid, l, index, e);
+        }else{
+            set(leftTreeIndex, r, mid, index, e);
+        }
+        tree[treeIndex] = merger.merger(tree[leftTreeIndex], tree[rightTreeIndex]);
+    }
+
+    /**
      * 获取指定索引的元素
      * @param index 索引
      * @return E
